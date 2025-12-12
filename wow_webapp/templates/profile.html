@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wow-card p-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h2 class="wow-section-title mb-1">My Characters</h2>
+      <p class="wow-muted mb-0">Signed in as <span class="badge badge-wow">{{ user }}</span></p>
+    </div>
+    <a class="btn btn-wow" href="{{ url_for('create_character') }}">Create Character</a>
+  </div>
+
+  {% if characters %}
+    <div class="table-responsive">
+      <table class="table table-dark table-striped table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Name</th><th>Level</th><th>Race</th><th>Class</th><th>Faction</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in characters %}
+            <tr>
+              <td><a class="wow-link" href="{{ url_for('character_detail', character_id=c.character_id) }}">{{ c.char_name }}</a></td>
+              <td><span class="wow-pill">{{ c.level }}</span></td>
+              <td>{{ c.race_name }}</td>
+              <td>{{ c.class_name }}</td>
+              <td>{{ c.faction_name }}</td>
+              <td class="d-flex gap-2 flex-wrap">
+                <a class="btn btn-outline-info btn-sm" href="{{ url_for('character_detail', character_id=c.character_id) }}">View</a>
+                <a class="btn btn-outline-warning btn-sm" href="{{ url_for('character_gear', character_id=c.character_id) }}">Gear</a>
+                <a class="btn btn-outline-success btn-sm" href="{{ url_for('character_quests', character_id=c.character_id) }}">Quests</a>
+                <form method="post" action="{{ url_for('delete_character', character_id=c.character_id) }}"
+                      onsubmit="return confirm('Delete this character?');">
+                  <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="wow-muted mb-0">No characters yet. Create one!</p>
+  {% endif %}
+</div>
+{% endblock %}

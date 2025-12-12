@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wow-card p-4">
+  <h2 class="wow-section-title mb-2">Choose Class + Name</h2>
+  <p class="wow-muted mb-3">
+    Faction: <span class="badge badge-wow">{{ faction.name }}</span>
+    &nbsp;|&nbsp; Race: <span class="badge badge-wow">{{ race.name }}</span>
+  </p>
+
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label text-light">Character Name</label>
+      <input class="form-control" name="name" maxlength="30" required>
+    </div>
+
+    <div class="mb-2">
+      <label class="form-label text-light">Class (restricted like Classic)</label>
+    </div>
+    <div class="row g-2">
+      {% for c in classes %}
+        <div class="col-md-3 col-sm-6">
+          <button class="btn btn-outline-warning w-100" name="class_id" value="{{ c.class_id }}" type="submit">
+            {{ c.name }}
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </form>
+</div>
+{% endblock %}

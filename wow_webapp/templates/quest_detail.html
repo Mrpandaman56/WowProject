@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wow-card p-3">
+  <h2 class="wow-section-title mb-3">{{ quest.name }}</h2>
+
+  <p class="mb-1"><strong>Required Level:</strong> {{ quest.level_req or '—' }}</p>
+  <p class="mb-1"><strong>Type:</strong> {{ quest.type or '—' }}</p>
+  <p class="mb-1"><strong>Reward Item:</strong> {{ quest.reward_item_name or '—' }}</p>
+  <p class="mb-3"><strong>Reward:</strong> {{ quest.reward or '—' }}</p>
+
+  <a class="btn btn-secondary" href="{{ url_for('quests') }}">Back to Quests</a>
+</div>
+{% endblock %}

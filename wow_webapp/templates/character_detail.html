@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wow-card p-4">
+  <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+    <div>
+      <h2 class="wow-section-title mb-2">{{ character.char_name }}</h2>
+      <div class="text-light">
+        <div><strong>Level:</strong> <span class="wow-pill">{{ character.level }}</span></div>
+        <div><strong>Race:</strong> {{ character.race_name }}</div>
+        <div><strong>Class:</strong> {{ character.class_name }}</div>
+        <div><strong>Faction:</strong> {{ character.faction_name }}</div>
+        <div><strong>Owner:</strong> {{ character.username }}</div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-column gap-2">
+      <a class="btn btn-outline-success"
+         href="{{ url_for('character_quests', character_id=character.character_id) }}">
+        Quest Log
+      </a>
+
+      {% if is_owner %}
+        <a class="btn btn-outline-warning"
+           href="{{ url_for('character_gear', character_id=character.character_id) }}">
+          Edit Equipment
+        </a>
+
+        <form method="post"
+              action="{{ url_for('character_level', character_id=character.character_id) }}"
+              class="d-flex gap-2 align-items-center">
+          <input type="number" name="level" min="1" max="60"
+                 value="{{ character.level }}" class="form-control form-control-sm"
+                 style="max-width: 110px;">
+          <button class="btn btn-success btn-sm" type="submit">Set Level</button>
+        </form>
+
+        <form method="post"
+              action="{{ url_for('delete_character', character_id=character.character_id) }}"
+              onsubmit="return confirm('Delete this character? This cannot be undone.');">
+          <button class="btn btn-danger">Delete Character</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <hr class="wow-hr my-4">
+
+  <h4 class="wow-section-title mb-3">Equipment</h4>
+
+  {% if equipment %}
+    <div class="table-responsive">
+      <table class="table table-dark table-striped table-hover align-middle mb-0">
+        <thead>
+          <tr><th>Slot</th><th>Item</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          {% for e in equipment %}
+            <tr>
+              <td>{{ e.slot }}</td>
+              <td>
+                {% if e.name %}{{ e.name }}{% else %}<span class="text-secondary">-- Empty --</span>{% endif %}
+              </td>
+              <td>
+                {% if e.gear_type %}{{ e.gear_type }}{% else %}<span class="text-secondary">-</span>{% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="wow-muted mb-0">No equipment rows found yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="wow-card p-4">
+      <h2 class="wow-section-title mb-3">Step 4 – Name Your Hero</h2>
+      <p class="text-muted">
+        Faction: {{ faction_name }} · Race: {{ race_name }} · Class: {{ class_name }}
+      </p>
+      <form method="post">
+        <input type="hidden" name="race_id" value="{{ race_id }}">
+        <input type="hidden" name="class_id" value="{{ class_id }}">
+        <div class="mb-3">
+          <label class="form-label">Character Name</label>
+          <input name="char_name" class="form-control" required>
+        </div>
+        <button class="btn btn-warning w-100" type="submit">Create Character</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

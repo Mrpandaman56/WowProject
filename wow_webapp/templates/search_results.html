@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="wow-card p-4">
+  <h2 class="wow-section-title mb-2">Search Users</h2>
+  <p class="wow-muted mb-3">Results for: <span class="badge badge-wow">{{ query }}</span></p>
+
+  {% if results %}
+    <ul class="list-group list-group-dark">
+      {% for r in results %}
+        <li class="list-group-item bg-transparent text-light border-secondary">
+          <a class="wow-link" href="{{ url_for('user_public', username=r.username) }}">{{ r.username }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="wow-muted mb-0">No users found.</p>
+  {% endif %}
+</div>
+{% endblock %}

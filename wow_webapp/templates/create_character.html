@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-4">
+    <div class="wow-card p-3 mb-3">
+      <h2 class="wow-section-title mb-3">Create Character</h2>
+      <p class="mb-1"><strong>Account:</strong> {{ user }}</p>
+      <p class="text-muted mb-0">
+        Choose a faction, race, class, and name.<br>
+        Race / class combos are validated like WoW Classic.
+      </p>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <form method="post" class="wow-card p-3">
+      <div class="mb-3">
+        <h4 class="wow-section-title mb-2">Faction</h4>
+        <div class="row g-3">
+          {% for f in factions %}
+            {% set is_alliance = 'Alliance' in f.name %}
+            {% set css = 'alliance' if is_alliance else 'horde' %}
+            <div class="col-md-6">
+              <label class="faction-card {{ css }}">
+                <input type="radio" name="faction_id" value="{{ f.faction_id }}" required>
+                <div class="h4 mb-1">{{ f.name }}</div>
+                <div class="small text-light-50">
+                  {{ 'For the Alliance!' if is_alliance else 'For the Horde!' }}
+                </div>
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <hr class="border-secondary">
+
+      <div class="mb-3 row">
+        <div class="col-md-6">
+          <label class="form-label">Race</label>
+          <select name="race_id" class="form-select" required>
+            <option value="">-- Select Race --</option>
+            {% for r in races %}
+              <option value="{{ r.race_id }}">
+                {{ r.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Class</label>
+          <select name="class_id" class="form-select" required>
+            <option value="">-- Select Class --</option>
+            {% for c in classes %}
+              <option value="{{ c.class_id }}">{{ c.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Character Name</label>
+        <input type="text" name="name" class="form-control" maxlength="20" required>
+        <div class="form-text">
+          2–12 letters recommended, like the real game.
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <button type="submit" class="btn btn-success">Create Character</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary ms-2">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
