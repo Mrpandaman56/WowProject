@@ -1,4 +1,3 @@
-1. My Database is currently located in CS302 Under Rayden_Project
 
 So basically i was able to implement most of what i wanted i think i had like this crazy idea of pictures of all the items and everything and character customization but i think that was farfetched and out of my league as of right now mainly just because of gathering all the .png and correct images would of been crazy but i was still able to implement character customization and make it as close as possible to how it is in game and then also you can customize your equipment and your quest you have completed and are completing. and my favorite part is definitely the main page where it shows all characters that have been created and you can click on any of them.
 
@@ -8,4 +7,4 @@ The character equipment editor is another cool page i made with database interac
 
 How to work my git folder In Wow_webapp is everything the server.py file and all .html files and how my websit was formatted what go cmd in wow_webapp folder do venv\scripts\activate then python server.py and it would launch and wow_webapp was its own folder i then created a GitHub repository for easiness and submission and now i provided RaydenProject.sql which is a backup of my database ignore WowProject that is just the GitHub Repository.
 
-if you get a weird error in cmd remove the wow_webapp from the folder and make sure its in your c: folder as no in a folder so its alone and can run  everything in there (Should fix it) if this doesn't make sense and sounds liek dumb teenager word slop just email me :)
+if you get a weird error in cmd remove the wow_webapp from the folder and make sure its in your c: folder as no in a folder so its alone and can run  everything in there (Should fix it) if this doesn't make sense and sounds like dumb teenager word slop just email me :)
